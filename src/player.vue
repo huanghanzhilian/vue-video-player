@@ -8,6 +8,11 @@ window.videojs = require('video.js')
 videojs = videojs.default || videojs
 export default {
   name: 'video-player',
+  data() {
+    return {
+      'img': require("./img/logo-w.png"),
+    }
+  },
   props: {
     options: {
       type: Object,
@@ -73,6 +78,8 @@ export default {
         plugins: {}
       }, this.options)
 
+
+
       // check sources
       /*
       if (!videoOptions.sources || !videoOptions.sources.length) {
@@ -110,7 +117,7 @@ export default {
       }
 
       this.player = videojs(this.$el.children[0], videoOptions, function() {
-
+        console.log(videoOptions.fbl)
         var playerss = this;
         window.playerss = playerss
         playerss.updateSrc(videoOptions.fbl)
@@ -164,7 +171,7 @@ export default {
           console.log(error)
         })*/
       })
-
+      var Component = videojs.getComponent("Component");
 
       if(!videoOptions.logothas){
         //获取咱们组件的基类，所有组件都要继承自这个类。
@@ -177,7 +184,7 @@ export default {
             button.className = "vjs-title-buttonhuang"
             return button;*/
             var img=document.createElement("img");
-            img.src="http://or4e899x1.bkt.clouddn.com/ytb_logo.png";
+            img.src=self.img;
             img.className = "vjs-title-buttonhuang";
             return img;
           }
@@ -199,49 +206,31 @@ export default {
       //头部提示
       //var titleBars = videojs.getComponent("Component");
       var TitleBar = videojs.extend(Component, {
-
-        // The constructor of a component receives two arguments: the
-        // player it will be associated with and an object of options.
         constructor: function(player, options) {
-
-          // It is important to invoke the superclass before anything else, 
-          // to get all the features of components out of the box!
           Component.apply(this, arguments);
 
-          // If a `text` option was passed in, update the text content of 
-          // the component.
           if (options.text) {
             this.updateTextContent(options.text);
           }
         },
 
-        // The `createEl` function of a component creates its DOM element.
         createEl: function() {
           return videojs.createEl('div', {
-
-            // Prefixing classes of elements within a player with "vjs-" 
-            // is a convention used in Video.js.
             className: 'vjs-title-bar'
           });
         },
-
-        // This function could be called at any time to update the text 
-        // contents of the component.
         updateTextContent: function(text) {
-
-          // If no text was provided, default to "Title Unknown"
           if (typeof text !== 'string') {
             text = 'Title Unknown';
           }
-
-          // Use Video.js utility DOM methods to manipulate the content
-          // of the component's element.
           videojs.emptyEl(this.el());
           videojs.appendContent(this.el(), text);
         }
       });
+
       videojs.registerComponent('TitleBar', TitleBar);
       this.player.addChild('TitleBar', { text: videoOptions.ctitle });
+
 
 
       //错误组件使用的元素
