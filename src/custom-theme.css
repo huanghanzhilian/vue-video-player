@@ -38,6 +38,13 @@
   left: 3em
 }
 
+
+
+
+
+
+
+
 .vjs-paused.vjs-has-started.vjs-custom-skin>.video-js .vjs-big-play-button,
 .video-js.vjs-ended .vjs-big-play-button,
 .video-js.vjs-paused .vjs-big-play-button {
@@ -48,15 +55,6 @@
 .vjs-seeking .vjs-big-play-button,
 .vjs-waiting .vjs-big-play-button {
   display: none!important
-}
-
-.vjs-custom-skin>.video-js .vjs-mouse-display:after,
-.vjs-custom-skin>.video-js .vjs-play-progress:after {
-  padding: 0 .4em .3em
-}
-
-.video-js.vjs-ended .vjs-loading-spinner {
-  display: none;
 }
 
 .video-js.vjs-ended .vjs-big-play-button {
@@ -70,10 +68,13 @@
 }
 
 .vjs-custom-skin>.video-js .vjs-big-play-button {
-  top: 50%;
+  /*top: 50%;
   left: 50%;
   margin-left: -1.5em;
-  margin-top: -1em
+  margin-top: -1em*/
+  position: absolute;
+  right: 20px !important;
+  bottom: 60px !important;
 }
 
 .vjs-custom-skin>.video-js .vjs-big-play-button {
@@ -82,14 +83,49 @@
   /*border-radius: 50%;*/
   height: 2em !important;
   line-height: 2em !important;
-  margin-top: -1em !important
+  /*margin-top: -1em !important*/
 }
 
 .video-js:hover .vjs-big-play-button,
 .vjs-custom-skin>.video-js .vjs-big-play-button:focus,
 .vjs-custom-skin>.video-js .vjs-big-play-button:active {
-  background-color: rgba(36, 131, 213, 0.9)
+  /*background-color: rgba(36, 131, 213, 0.9)*/
 }
+
+@media only screen and (min-width: 1026px) {
+  .vjs-custom-skin>.video-js .vjs-big-play-button {
+    display: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.vjs-custom-skin>.video-js .vjs-mouse-display:after,
+.vjs-custom-skin>.video-js .vjs-play-progress:after {
+  padding: 0 .4em .3em
+}
+
+.video-js.vjs-ended .vjs-loading-spinner {
+  display: none;
+}
+
+
+
+
+
+
 
 .vjs-custom-skin>.video-js .vjs-loading-spinner {
   border-color: rgba(36, 131, 213, 0.8)
@@ -101,7 +137,7 @@
 
 .vjs-custom-skin>.video-js .vjs-control-bar {
   /*background-color: rgba(0,0,0,0.3) !important;*/
-  background: rgba(0,0,0,.4);
+  background: rgba(0, 0, 0, .4);
   color: #ffffff;
   font-size: 14px
 }
@@ -114,7 +150,7 @@
 .vjs-custom-skin>.video-js .vjs-play-progress:before {
   font-size: 1.1em;
   top: -0.35em;
-/*  background: #e34849;*/
+  /*  background: #e34849;*/
   display: none;
 }
 
@@ -127,6 +163,7 @@
   font-size: 1.3em;
   margin: 0px;
 }
+
 .vjs-custom-skin>.video-js .vjs-progress-control:hover .vjs-play-progress:before {
   display: block;
 }
@@ -147,8 +184,8 @@
 .vjs-custom-skin>.video-js .vjs-play-progress:after {
   border-radius: 0;
   font-size: 1em;
-  padding: 0;
-  width: 3em;
+  padding: 0 4px;
+  /*width: 3em;*/
   height: 1.5em;
   line-height: 1.5em;
   top: -3em;
@@ -166,6 +203,14 @@
 .vjs-custom-skin>.video-js .vjs-control-bar .vjs-resolution-button .vjs-menu {
   /*order: 4;*/
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -188,6 +233,14 @@
   font-size: 1.2em;
   line-height: 2.4;
 }
+
+
+
+
+
+
+
+
 
 
 /*进度条*/
@@ -218,13 +271,11 @@
   order: 5;
 }
 
-.vjs-custom-skin>.video-js .vjs-menu-button.vjs-control {
-  //order: 6;
-  cursor: pointer;
-  position: absolute;
-  left: initial;
-  right: 60px;
-}
+
+
+
+
+
 
 .vjs-title-buttonhuang {
   width: 60px;
@@ -233,8 +284,7 @@
   position: absolute;
   left: initial;
   right: 125px;
-  top: 10px;
-  //order: 7;
+  top: 10px; //order: 7;
 }
 
 .vjs-custom-skin>.video-js .vjs-control-bar .vjs-fullscreen-control {
@@ -262,6 +312,14 @@
 
 
 
+
+
+
+
+
+
+
+
 /* 
   Only show the title bar after playback has begun (so as not to hide
   the big play button) and only when paused or when the user is 
@@ -273,17 +331,33 @@
   display: block;
 }
 
-.vjs-control .vjs-menu-button-popup.vjs-button {
-  display: none;
-}
 
+
+
+
+
+
+
+
+
+/* .vjs-custom-skin>.video-js .vjs-menu-button.vjs-control.vjs-button{
+  right: 200px;
+} */
 
 
 /*暂停时候中间箭头*/
 
-.vjs-custom-skin>.video-js .vjs-big-play-button {
-  display: none;
-}
+
+ .vjs-custom-skin>.video-js .vjs-big-play-button {
+  /*display: block;*/
+} 
+
+
+/*@media only screen and (min-width: 940px) {
+  .vjs-custom-skin>.video-js .vjs-big-play-button {
+    display: block;
+  }
+}*/
 
 .video-js.vjs-ended .vjs-big-play-button {
   display: none !important;
@@ -335,37 +409,188 @@ button:focus {
   outline: none;
 }
 
-.vjs-custom-skin>.video-js .vjs-play-progress, .vjs-custom-skin>.video-js .vjs-volume-level{
+.vjs-custom-skin>.video-js .vjs-play-progress,
+.vjs-custom-skin>.video-js .vjs-volume-level {
   background: #e34849;
 }
 
-.video-js .vjs-title-bar{
+.video-js .vjs-title-bar {
   //display: none;
 }
-.video-js.vjs-paused.vjs-has-started .vjs-title-bar, .video-js.vjs-user-active.vjs-has-started .vjs-title-bar {
-    display: none;
+
+.video-js.vjs-paused.vjs-has-started .vjs-title-bar,
+.video-js.vjs-user-active.vjs-has-started .vjs-title-bar {
+  display: none;
 }
-.video-js.vjs-fullscreen.vjs-user-active .vjs-title-bar{
+
+.video-js.vjs-fullscreen.vjs-user-active .vjs-title-bar {
   display: block;
 }
 
 
+
+
+
+
+
+
+
+
 /* css 错误组件 s */
-.my-error-display{
-    position:absolute;
-    font-size:20px;
-    color:red;
-    width:80%;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    border:1px solid white;
-    padding:10px;
-    display:none;
+
+.my-error-display {
+  position: absolute;
+  font-size: 20px;
+  color: red;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid white;
+  padding: 10px;
+  display: none;
 }
+
+
+
+
+
+
+
+
+
 /*  前面提到，播放器出现错误时，我们的播放容器div会添加class vjs-error
  *  这里我们使用这个类来作为错误信息的显示前提 
  */
-.vjs-error .my-error-display{
-    display:block;
+
+.vjs-error .my-error-display {
+  display: block;
 }
+
+
+
+
+
+
+
+
+
 /* css 错误组件 e */
+
+
+/*关闭带设置的字幕*/
+
+.video-js .vjs-subs-caps-button {
+  display: none;
+}
+
+
+
+
+
+
+
+
+/*关闭带设置的字幕*/
+
+
+/*字幕*/
+
+
+/* .video-js .vjs-subtitles-button.vjs-control{
+  position: absolute!important;
+  left: initial!important;
+  right: 160px!important;
+} */
+
+.video-js .vjs-subtitles-button {
+  display: none;
+}
+
+
+
+
+
+
+
+/*字幕*/
+
+
+/*自定义字幕*/
+
+.video-js .vjs-hSubtitle {
+  width: 3em;
+  height: 100%;
+  position: absolute!important;
+  left: initial!important;
+  right: 110px!important;
+}
+
+
+.video-js .vjs-hSubtitle {
+  /* width: 48px;
+  height: 36px;
+  position: relative; */
+}
+
+.video-js .vjs-hSubtitle:after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 2px;
+  border-radius: 2px;
+  width: 0;
+  left: 18px;
+  bottom: 10px;
+  background-color: #e34849;
+  -moz-transition: left .1s cubic-bezier(0.4, 0.0, 1, 1), width .1s cubic-bezier(0.4, 0.0, 1, 1);
+  -webkit-transition: left .1s cubic-bezier(0.4, 0.0, 1, 1), width .1s cubic-bezier(0.4, 0.0, 1, 1);
+  transition: left .1s cubic-bezier(0.4, 0.0, 1, 1), width .1s cubic-bezier(0.4, 0.0, 1, 1);
+}
+
+.video-js .vjs-hSubtitle.open {
+  color: red;
+}
+
+.video-js .vjs-hSubtitle.open:after {
+  width: 24px;
+  left: 9px;
+  -moz-transition: left .25s cubic-bezier(0.0, 0.0, 0.2, 1), width .25s cubic-bezier(0.0, 0.0, 0.2, 1);
+  -webkit-transition: left .25s cubic-bezier(0.0, 0.0, 0.2, 1), width .25s cubic-bezier(0.0, 0.0, 0.2, 1);
+  transition: left .25s cubic-bezier(0.0, 0.0, 0.2, 1), width .25s cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+
+
+
+
+
+
+/*自定义字幕*/
+
+
+/*分辨率*/
+
+.video-js .vjs-resolution-button {
+  position: absolute;
+  left: initial;
+  right: 60px;
+}
+
+.video-js .vjs-resolution-button .vjs-menu-button {
+  /*display: none;*/
+  /*background:red;*/
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2145;
+}
+
+/*分辨率*/
+
+/*uc浏览器耳机按钮s*/
+.vjs-custom-skin>.video-js .vjs-audio-button {
+  display: none!important
+}
+/*uc浏览器耳机按钮e*/
+
