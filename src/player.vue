@@ -8,6 +8,9 @@
 <script>
 window.videojs = require('video.js')
 window.libjass = require('libjass')
+window.URLSafeBase64 = require('urlsafe-base64')
+//import URLSafeBase64 from 'urlsafe-base64'
+//require('videojs5-hlsjs-source-handler')
 videojs = videojs.default || videojs
 export default {
   name: 'video-player',
@@ -41,9 +44,16 @@ export default {
       default: function() {
         return 'statechanged'
       }
+    },
+    subtitle:{
+      type: String,
+      default: function() {
+        return ''
+      }
     }
   },
   mounted: function() {
+    //console.log(this.player)
     /*if (!this.player) {
       this.initialize()
     }*/
@@ -69,6 +79,16 @@ export default {
         width: '100%',
         height: '100%',
         language: 'en',
+        // "html5": {
+        //   hls: {
+        //     withCredentials: true
+        //   }
+        // },
+        // html5: {
+        //     hlsjsConfig: {
+        //         debug: true
+        //     }
+        // },
         controlBar: {
           // remainingTimeDisplay: false,
           // subtitlesButton: true, //字幕
@@ -159,6 +179,7 @@ export default {
 
         var playerss = this;
         window.playerss = playerss
+        //console.log(videoOptions.fbl)
         playerss.updateSrc(videoOptions.fbl)
 
         //监听切换视频 未登入时候点击通知vue父组件
@@ -218,6 +239,8 @@ export default {
 
 
       })
+
+      //this.player.qualityPickerPlugin();
 
 
 
@@ -328,7 +351,8 @@ export default {
       //错误组件使用的元素
 
       if (videoOptions.ass) {
-        var vjs_ass = this.player.ass(videoOptions.ass);
+        //console.log(videoOptions.ass)
+        var vjs_ass = this.player.ass(videoOptions.ass,self.subtitle);
       }
       /*var tecksmy = this.player.textTracks()
       for (var i = 0; i < tecksmy.length; i++) {
@@ -342,6 +366,10 @@ export default {
 
 
     },
+
+
+
+
     //选择字幕按钮
     sopostah() {
       //字幕
@@ -401,16 +429,20 @@ export default {
   },
   watch: {
     options(vio, vie) {
+      //console.log(vio)
       this.dispose()
       this.initialize();
 
     },
     comImoveTyoewe(vio, vie) {
-      for (var i = 0; i < vio.length; i++) {
-        if (vio[i].kind == "subtitles" && vio[i].label == "engsub") {
-          this.textTracksmy = vio[i];
+      if(vio){
+        for (var i = 0; i < vio.length; i++) {
+          if (vio[i].kind == "subtitles" && vio[i].label == "engsub") {
+            this.textTracksmy = vio[i];
+          }
         }
       }
+        
     },
     textTracksmy(vio, vie) {
       this.sopostah();
