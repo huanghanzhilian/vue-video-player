@@ -8,7 +8,8 @@
 <script>
 window.videojs = require('video.js')
 window.libjass = require('libjass')
-window.URLSafeBase64 = require('urlsafe-base64')
+//require('videojs-ass')
+//window.URLSafeBase64 = require('urlsafe-base64')
 //import URLSafeBase64 from 'urlsafe-base64'
 //require('videojs5-hlsjs-source-handler')
 videojs = videojs.default || videojs
@@ -79,16 +80,14 @@ export default {
         width: '100%',
         height: '100%',
         language: 'en',
-        // "html5": {
-        //   hls: {
-        //     withCredentials: true
-        //   }
-        // },
-        // html5: {
-        //     hlsjsConfig: {
-        //         debug: true
-        //     }
-        // },
+        "html5": {
+          // nativeAudioTracks: false,
+          // nativeVideoTracks: false,
+          // nativeTextTracks: true,
+          // hls: {
+          //   //withCredentials: true
+          // }
+        },
         controlBar: {
           // remainingTimeDisplay: false,
           // subtitlesButton: true, //字幕
@@ -119,15 +118,15 @@ export default {
           'audioMenuButton':false,//耳机按钮
           'playbackRate':false,
         },
-        // techOrder: ['html5'],
-        plugins: {
-          /*ass: {
-            src: 'http://test.huanghanlian.com/%5Bzmk.tw%5DBatman.v.Superman.Dawn.of.Justice.2016.Ultimate.Edition.WEB-DL.Chs.&amp;.Eng.ass',
-            label: "engsub",
-            videoWidth: 640,
-            videoHeight: 360,
-          }*/
-        }
+        //techOrder: ['html5'],
+        // plugins: {
+        //   ass: {
+        //     src: 'http://test.huanghanlian.com/%5Bzmk.tw%5DBatman.v.Superman.Dawn.of.Justice.2016.Ultimate.Edition.WEB-DL.Chs.&amp;.Eng.ass',
+        //     label: "engsub",
+        //     videoWidth: 640,
+        //     videoHeight: 360,
+        //   }
+        // }
       }, this.options)
 
 
@@ -207,6 +206,7 @@ export default {
 
         // events
         var events = ['loadeddata',
+          'progress',
           'canplay',
           'canplaythrough',
           'play',
@@ -349,10 +349,49 @@ export default {
       })
 
       //错误组件使用的元素
+      
+
+
+
+
+      function samuredDecoder(source) {
+        if (source) {
+          var lenth = source.replace(/(\d{1})(\S+)/, '$1')
+          var realSource = source.replace(/(\d{1})(\S+)/, '$2');
+          var decode1 = byteToString(URLSafeBase64.decode(realSource)).replace(new RegExp('(\\S+)(\\d{' + lenth + '})'), '$1')
+          return byteToString(URLSafeBase64.decode(decode1)).replace(new RegExp('(\\d{' + lenth + '})(\\S+)'), '$2');
+        }
+        return '';
+      };
+      function byteToString(arr) {  
+          if(typeof arr === 'string') {  
+              return arr;  
+          }  
+          var str = '',  
+          _arr = arr;  
+          for(var i = 0; i < _arr.length; i++) {  
+              var one = _arr[i].toString(2),  
+                  v = one.match(/^1+?(?=0)/);  
+              if(v && one.length == 8) {  
+                  var bytesLength = v[0].length;  
+                  var store = _arr[i].toString(2).slice(7 - bytesLength);  
+                  for(var st = 1; st < bytesLength; st++) {  
+                      store += _arr[st + i].toString(2).slice(2);  
+                  }  
+                  str += String.fromCharCode(parseInt(store, 2));  
+                  i += bytesLength - 1;  
+              } else {  
+                  str += String.fromCharCode(_arr[i]);  
+              }  
+          }  
+          return str;  
+      };
 
       if (videoOptions.ass) {
-        //console.log(videoOptions.ass)
-        var vjs_ass = this.player.ass(videoOptions.ass,self.subtitle);
+        var base = samuredDecoder(self.subtitle)
+        //console.log(base)
+        var vjs_ass = this.player.ass(videoOptions.ass,base);
+        //var vjs_ass = this.player.ass(videoOptions.ass);
       }
       /*var tecksmy = this.player.textTracks()
       for (var i = 0; i < tecksmy.length; i++) {
